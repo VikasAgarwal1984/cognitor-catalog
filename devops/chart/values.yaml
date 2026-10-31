@@ -1,0 +1,46 @@
+replicaCount: 1
+
+image:
+  repository: 127.0.0.1:30500/cognitor-catalog
+  tag: "1.0.0"
+  pullPolicy: IfNotPresent
+
+nameOverride: "cognitor-catalog"
+fullnameOverride: "cognitor-catalog"
+
+service:
+  type: ClusterIP
+  port: 4200
+  targetPort: 4200
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 1000m
+    memory: 512Mi
+
+ingress:
+  enabled: true
+  className: nginx
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-body-size: "64m"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "120"
+    nginx.ingress.kubernetes.io/auth-url: "https://subhadra.naviisha.com/outpost.goauthentik.io/auth/nginx"
+    nginx.ingress.kubernetes.io/auth-signin: "https://subhadra.naviisha.com/outpost.goauthentik.io/start?rd=$escaped_request_uri"
+    nginx.ingress.kubernetes.io/auth-response-headers: "Set-Cookie,X-authentik-username,X-authentik-groups,X-authentik-email,X-authentik-name,X-authentik-uid"
+  hosts:
+    - host: subhadra.naviisha.com
+      paths:
+        - path: /catalog
+          pathType: Prefix
+    - host: dev.subhadra.naviisha.com
+      paths:
+        - path: /catalog
+          pathType: Prefix
+  tls:
+    - secretName: subhadra-nvh-tls
+      hosts:
+        - subhadra.naviisha.com
+        - dev.subhadra.naviisha.com

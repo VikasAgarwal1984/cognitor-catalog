@@ -1,0 +1,25 @@
+{
+  "name": "cognitor-catalog",
+  "version": "1.0.0",
+  "description": "Central Repository Indexer: AST Code Graph, Document Library, and SDLC Traceability Engine",
+  "license": "Apache-2.0",
+  "type": "module",
+  "scripts": {
+    "build:server": "tsc -p tsconfig.server.json",
+    "build:ui": "cd src/frontend && npm run build",
+    "build": "npm run build:server && npm run build:ui",
+    "start": "node dist/server/index.js",
+    "dev": "tsx watch src/server/index.ts"
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "cors": "^2.8.5"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "@types/cors": "^2.8.17",
+    "@types/node": "^22.13.4",
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cognitor-catalog.fullname" . }}
+  labels:
+    app.kubernetes.io/name: {{ include "cognitor-catalog.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "cognitor-catalog.name" . }}
+      app.kubernetes.io/instance: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "cognitor-catalog.name" . }}
+        app.kubernetes.io/instance: {{ .Release.Name }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: http
+              containerPort: 4200
+              protocol: TCP
+          env:
+            - name: PORT
+              value: "4200"
+            - name: BASE_PATH
+              value: "/catalog/"
+            - name: CATALOG_ROOT_DIR
+              value: "/workspaces"
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: workspaces
+              mountPath: /workspaces
+              readOnly: true
+      volumes:
+        - name: workspaces
+          hostPath:
+            path: /home/vikas/git
+            type: DirectoryOrCreate
