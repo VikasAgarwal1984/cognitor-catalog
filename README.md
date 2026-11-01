@@ -16,3 +16,4 @@ Licensed strictly under **Apache-2.0**.
 4. **Angular 22 Standalone Frontend**:
    - Built with Google Material Design 3 (M3) theming, Angular Router, and responsive layouts.
    - Served at `/catalog/` behind Authentik Forward-Auth Outpost SSO.
+

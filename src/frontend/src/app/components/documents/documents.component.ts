@@ -226,3 +226,4 @@ export class DocumentsComponent implements OnInit {
     this.loadDocuments();
   }
 }
+

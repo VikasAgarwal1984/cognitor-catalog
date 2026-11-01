@@ -44,3 +44,4 @@ export interface CatalogSummary {
   lastScanDurationMs: number;
   lastScannedAt: string;
 }
+

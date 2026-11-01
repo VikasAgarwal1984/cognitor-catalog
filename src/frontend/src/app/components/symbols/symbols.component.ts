@@ -231,3 +231,4 @@ export class SymbolsComponent implements OnInit {
     this.loadSymbols();
   }
 }
+

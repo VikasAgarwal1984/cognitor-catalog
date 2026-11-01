@@ -12,3 +12,4 @@ export const routes: Routes = [
   { path: 'traceability', component: TraceabilityComponent },
   { path: '**', redirectTo: 'overview' }
 ];
+

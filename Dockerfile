@@ -42,3 +42,4 @@ COPY --from=build /app/src/frontend/dist/frontend/browser ./dist/frontend/dist/f
 EXPOSE 4200
 
 CMD ["node", "dist/server/index.js"]
+

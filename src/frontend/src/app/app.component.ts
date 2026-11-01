@@ -29,3 +29,4 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   `]
 })
 export class AppComponent {}
+
