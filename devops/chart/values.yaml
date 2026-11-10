@@ -13,6 +13,9 @@ service:
   port: 4200
   targetPort: 4200
 
+nodeSelector:
+  kubernetes.io/hostname: ubu26
+
 resources:
   requests:
     cpu: 100m
